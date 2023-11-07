@@ -8,23 +8,23 @@ import {
 
 const style = StyleSheet.create({
   tab: {
-    backgroundColor: '#2979F2',
-    height: verticalScale(50),
+    backgroundColor: '#4870FF',
+    height: verticalScale(34),
     justifyContent: 'center',
-    borderRadius: horizontalScale(50),
+    borderRadius: horizontalScale(20),
   },
   title: {
-    fontFamily: getFontFamily('Inter', '500'),
-    fontSize: scaleFontSize(14),
-    lineHeight: scaleFontSize(17),
+    fontFamily: getFontFamily('Nunito', '900'),
+    fontSize: scaleFontSize(16),
+    lineHeight: scaleFontSize(16),
     color: '#FFFFFF',
     textAlign: 'center',
   },
   inactiveTab: {
-    backgroundColor: '#F3F5F9',
+    backgroundColor: '#21283F',
   },
   inactiveTitle: {
-    color: '#79869F',
+    color: '#FFFFFF',
   },
 });
 
