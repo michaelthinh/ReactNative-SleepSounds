@@ -8,7 +8,6 @@ import {
 
 const style = StyleSheet.create({
   button: {
-    backgroundColor: 'rgba(33, 40, 63, 1)',
     height: verticalScale(50),
     justifyContent: 'center',
     borderRadius: horizontalScale(50),
