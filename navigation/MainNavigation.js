@@ -14,14 +14,13 @@ import {useTheme} from 'react-native-paper';
 
 const Tab = createMaterialBottomTabNavigator();
 
-export const Authenticated = () => {
+export const Home = () => {
   const theme = useTheme();
   theme.colors.secondaryContainer = 'transparent';
   return (
     <Tab.Navigator
       shifting={true}
       labeled={true}
-      initialRouteName={Routes.Sleep}
       activeColor="#4870FF"
       barStyle={{backgroundColor: '#21283F'}}
       screenOptions={{
@@ -33,7 +32,7 @@ export const Authenticated = () => {
         component={Sleep}
         options={{
           tabBarColor: 'transparent',
-          tabBarLabel: Routes.Profile,
+          tabBarLabel: Routes.Sleep,
           tabBarIcon: ({focused}) => (
             <FontAwesomeIcon
               icon={faMoon}
@@ -48,7 +47,7 @@ export const Authenticated = () => {
         component={Composer}
         options={{
           tabBarColor: 'transparent',
-          tabBarLabel: Routes.Profile,
+          tabBarLabel: Routes.Composer,
           tabBarIcon: ({focused}) => (
             <FontAwesomeIcon
               icon={faMusic}
