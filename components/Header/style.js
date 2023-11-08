@@ -6,7 +6,7 @@ const style = StyleSheet.create({
   title1: {
     fontFamily: getFontFamily('Nunito', '900'),
     fontSize: scaleFontSize(34),
-    lineHeight: scaleFontSize(36),
+    lineHeight: scaleFontSize(38),
     color: '#022150',
   },
   title2: {
@@ -18,7 +18,7 @@ const style = StyleSheet.create({
   title3: {
     fontFamily: getFontFamily('Nunito', '900'),
     fontSize: scaleFontSize(16),
-    lineHeight: scaleFontSize(16),
+    lineHeight: scaleFontSize(20),
     color: '#022150',
   },
 });

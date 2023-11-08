@@ -14,8 +14,8 @@ const RootNavigation = () => {
         header: () => null,
         headerShown: false,
       }}>
-      <Stack.Screen name={Routes.IntroSlide} component={IntroSlides} />
       <Stack.Screen name={Routes.Home} component={Home} />
+      <Stack.Screen name={Routes.IntroSlide} component={IntroSlides} />
     </Stack.Navigator>
   );
 };

@@ -9,6 +9,7 @@ import style from './style';
 import Header from '../../components/Header/Header';
 import {updateSelectedCategoryId} from '../../redux/reducers/Categories';
 import Tab from '../../components/Tab/Tab';
+import SingleAlbumItem from '../../components/SingleAlbumItem/SingleAlbumItem';
 
 const Sleep = () => {
   const categories = useSelector(state => state.categories);
@@ -50,47 +51,76 @@ const Sleep = () => {
 
   return (
     <SafeAreaView style={[globalStyle.mainBackground, globalStyle.flex]}>
+      <View style={style.headerTextContainer}>
+        <Header type={2} title={'Sleep'} color={'#FFF'} />
+      </View>
+      <View style={style.categories}>
+        <FlatList
+          onEndReachedThreshold={0.5}
+          onEndReached={() => {
+            if (isLoadingCategories) {
+              return;
+            }
+            setIsLoadingCategories(true);
+            let newData = pagination(
+              categories.categories,
+              categoryPage,
+              categoryPageSize,
+            );
+            if (newData.length > 0) {
+              setCategoryList(prevState => [...prevState, ...newData]);
+              setCategoryPage(prevState => prevState + 1);
+            }
+            setIsLoadingCategories(false);
+          }}
+          data={categoryList}
+          showsHorizontalScrollIndicator={false}
+          horizontal={true}
+          renderItem={({item}) => (
+            <View style={style.categoryItem} key={item.categoryId}>
+              <Tab
+                tabId={item.categoryId}
+                onPress={value => dispatch(updateSelectedCategoryId(value))}
+                title={item.name}
+                isInactive={item.categoryId !== categories.selectedCategoryId}
+              />
+            </View>
+          )}
+        />
+      </View>
       <ScrollView>
-        <View style={style.headerTextContainer}>
-          <Header type={2} title={'Sleep'} color={'#FFF'} />
-        </View>
-        <View style={style.categories}>
-          <FlatList
-            onEndReachedThreshold={0.5}
-            onEndReached={() => {
-              if (isLoadingCategories) {
-                return;
-              }
-              setIsLoadingCategories(true);
-              let newData = pagination(
-                categories.categories,
-                categoryPage,
-                categoryPageSize,
-              );
-              if (newData.length > 0) {
-                setCategoryList(prevState => [...prevState, ...newData]);
-                setCategoryPage(prevState => prevState + 1);
-              }
-              setIsLoadingCategories(false);
-            }}
-            data={categoryList}
-            showsHorizontalScrollIndicator={false}
-            horizontal={true}
-            renderItem={({item}) => (
-              <View style={style.categoryItem} key={item.categoryId}>
-                <Tab
-                  tabId={item.categoryId}
-                  onPress={value => dispatch(updateSelectedCategoryId(value))}
-                  title={item.name}
-                  isInactive={item.categoryId !== categories.selectedCategoryId}
-                />
-              </View>
-            )}
-          />
-        </View>
-        {albumItems.length > 0 && (
+        {albumItems.length > 0 ? (
           <View style={style.albumItemsContainer}>
-            <Text style={{color: 'white'}}>Co album items</Text>
+            {albumItems.map(value => {
+              const categoryInformation = categories.categories.find(
+                val => val.categoryId === categories.selectedCategoryId,
+              );
+              return (
+                <View key={value.albumId} style={style.singleAlbumItem}>
+                  <SingleAlbumItem
+                    // onPress={selectedDonationId => {
+                    //   dispatch(updateSelectedDonationId(selectedDonationId));
+                    //   navigation.navigate(Routes.SingleDonationItem, {
+                    //     categoryInformation: categoryInformation,
+                    //   });
+                    // }}
+                    albumItemId={value.albumId}
+                    image={value.image}
+                    albumTitle={value.name}
+                    categoryTitle={categoryInformation.name}
+                    albumNumberOfSongs={value.songIds.length}
+                  />
+                </View>
+              );
+            })}
+          </View>
+        ) : (
+          <View style={style.albumItemsContainer}>
+            <Header
+              type={3}
+              title={'No albums found with this category'}
+              color={'#FFFFFF'}
+            />
           </View>
         )}
       </ScrollView>
