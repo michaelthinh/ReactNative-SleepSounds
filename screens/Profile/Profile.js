@@ -26,8 +26,9 @@ import {
   faStar,
 } from '@fortawesome/free-solid-svg-icons';
 import {scaleFontSize} from '../../assets/styles/scaling';
+import {Routes} from '../../navigation/Routes';
 
-const Profile = () => {
+const Profile = ({navigation}) => {
   return (
     <SafeAreaView style={[globalStyle.mainBackground, globalStyle.flex]}>
       <View style={style.headerTextContainer}>
@@ -56,7 +57,9 @@ const Profile = () => {
       <ScrollView
         showsVerticalScrollIndicator={false}
         style={style.optionsContainer}>
-        <Pressable style={style.itemContainer}>
+        <Pressable
+          style={style.itemContainer}
+          onPress={() => navigation.navigate(Routes.Premium)}>
           <View style={style.startItem}>
             <View style={[style.iconContainer, {backgroundColor: '#4C382D'}]}>
               <FontAwesomeIcon

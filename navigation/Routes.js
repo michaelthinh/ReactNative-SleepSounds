@@ -4,4 +4,5 @@ export const Routes = {
   Composer: 'Composer',
   Profile: 'Profile',
   Home: 'Home',
+  Premium: 'Premium',
 };
